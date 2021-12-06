@@ -11,6 +11,33 @@ body {
     font-family: $main-header-font;
 }
 
+header input {
+    font-family: $main-header-font;
+    color: #292828;
+    padding: 5px;
+    height: 15px;
+    border-radius: 10px;
+}
+
+#search {
+    margin-left: 10px;
+    margin-right: 50px;
+    font-family: $main-header-font;
+    border-radius: 27px;
+    cursor: pointer;
+    border: 1px solid #6e6d6d;
+    outline: none;
+    height: 31px;
+    width: 90px;
+    margin-bottom: 10px;
+
+    &:hover {
+        border: 1px solid tomato;
+        color: tomato;
+        transition: 200ms;
+    }
+}
+
 .container {
     max-width: 1140px;
     margin: 0 auto;
@@ -46,7 +73,7 @@ header {
 .goods-list {
     margin-top: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .goods-item {
@@ -72,9 +99,9 @@ header {
 
 .goods-add-btn {
     font-family: $main-header-font;
-    border-radius: 27px 27px 27px 27px;
+    border-radius: 27px;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid #6e6d6d;
     outline: none;
     height: 31px;
     width: 90px;
