@@ -9,6 +9,34 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+header input {
+  font-family: "Lato", sans-serif;
+  color: #292828;
+  padding: 5px;
+  height: 15px;
+  border-radius: 10px;
+}
+
+#search {
+  margin-left: 10px;
+  margin-right: 50px;
+  font-family: "Lato", sans-serif;
+  border-radius: 27px;
+  cursor: pointer;
+  border: 1px solid #6e6d6d;
+  outline: none;
+  height: 31px;
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+#search:hover {
+  border: 1px solid tomato;
+  color: tomato;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+
 .container {
   max-width: 1140px;
   margin: 0 auto;
@@ -83,7 +111,7 @@ header {
 
 .goods-add-btn {
   font-family: "Lato", sans-serif;
-  border-radius: 27px 27px 27px 27px;
+  border-radius: 27px;
   cursor: pointer;
   border: 1px solid #6e6d6d;
   outline: none;

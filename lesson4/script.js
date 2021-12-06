@@ -52,6 +52,20 @@ class GoodsItem {
 }
 
 class GoodsList {
+  constructor() {
+    const searchbutton = document.getElementById('search');
+    searchbutton.addEventListener('click', () => {
+      this.filteredGoods();
+    })
+  }
+
+  filteredGoods() {
+    const input = document.getElementsByTagName('input')[0];
+    this.filterGoods = this.goods.filter(({ title }) => {
+      return new RegExp(input.value).test(title);
+    });
+    this.render();
+  }
 
   getSum() {
     return this.goods.reduce((prev, { price }) => prev + price, 0)
@@ -64,20 +78,19 @@ class GoodsList {
 
   setGoods() {
     return service(URL, GOODS_POSTFIX).then((data) => {
-      return reformData(data)
+      const result = reformData(data);
+      this.goods = result;
+      this.filterGoods = result;
     });
   }
 
   render() {
-    this.setGoods().then((data) => {
-      this.goods = data;
-      const _goods = [...this.goods];
-      const _goodsItems = _goods.map((item) => {
-        const goodsItem = new GoodsItem(item);
-        return goodsItem.render();
-      })
-      document.querySelector('.goods-list').innerHTML = _goodsItems.join('');
-    });
+    const _goods = [...this.filterGoods];
+    const _goodsItems = _goods.map((item) => {
+      const goodsItem = new GoodsItem(item);
+      return goodsItem.render();
+    })
+    document.querySelector('.goods-list').innerHTML = _goodsItems.join('');
   }
 }
 
@@ -92,10 +105,6 @@ class Basket {
     return service(URL, `${DELETE_GOOD_TO_BASKET_POSTFIX}/${id}`, "DELETE").then((data) => {
     });
   }
-  // Считаем стоимость и количество товаров в корзине
-  calcBasket() { }
-  // Рендер содержимого корзины
-  render() { }
 }
 
 class BasketItem {
@@ -106,5 +115,19 @@ class BasketItem {
 
 onload = () => {
   const goodsList = new GoodsList();
-  goodsList.render();
+  goodsList.setGoods().then(() => {
+    goodsList.render();
+  });
 }
+
+// Занятие 4 Задание 1
+const text = "Lorem 'ipsum' dolor 'sit amet', consectetur adipisicing elit. Autem voluptatum nostrum cumque. 'Cum quibusdam at ipsum, eaenim' 'perspiciatis magnidolore accusamus minima' provident quos. Perferendis";
+
+const re = /'/g;
+console.log(text.replace(re, "\""));
+
+// Занятие 4 Задание 2
+const text2 = "Lore'm 'ip'sum' dol'or sit amet, consectetur adipisicing elit. Autem voluptatum nostrum cu'mque. 'Cum quibusdam at ipsum, eaenim' doloribus audantium consectetur, 'perspiciatis' Perferendis";
+
+const re2 = /\b'(?!\b)|(?<!\b)'\b/gi;
+console.log(text2.replace(re2, "\""));
