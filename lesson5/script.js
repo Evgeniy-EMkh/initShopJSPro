@@ -114,20 +114,38 @@ class BasketItem {
 }
 
 onload = () => {
-  const goodsList = new GoodsList();
-  goodsList.setGoods().then(() => {
-    goodsList.render();
+  //const goodsList = new GoodsList();
+  //goodsList.setGoods().then(() => {
+  //  goodsList.render();
+  //});
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      goods: [],
+      filteredGoods: [],
+      search: '',
+      isVisibleCart: false
+    },
+    mounted() {
+      service(URL, GOODS_POSTFIX).then((data) => {
+        const result = reformData(data);
+        this.goods = result;
+        this.filteredGoods = result;
+      });
+    },
+    methods: {
+      filter() {
+        this.filteredGoods = this.goods.filter(({ title }) => {
+          return new RegExp(this.search, 'i').test(title);
+        });
+      },
+      showBasket() {
+        this.isVisibleCart = true
+      },
+      closeBasket() {
+        this.isVisibleCart = false
+      }
+    }
   });
 }
-
-// Занятие 4 Задание 1
-const text = "Lorem 'ipsum' dolor 'sit amet', consectetur adipisicing elit. Autem voluptatum nostrum cumque. 'Cum quibusdam at ipsum, eaenim' 'perspiciatis magnidolore accusamus minima' provident quos. Perferendis";
-
-const re = /'/g;
-console.log(text.replace(re, "\""));
-
-// Занятие 4 Задание 2
-const text2 = "Lore'm 'ip'sum' dol'or sit amet, consectetur adipisicing elit. Autem voluptatum nostrum cu'mque. 'Cum quibusdam at ipsum, eaenim' doloribus audantium consectetur, 'perspiciatis' Perferendis";
-
-const re2 = /\b'(?!\b)|(?<!\b)'\b/gi;
-console.log(text2.replace(re2, "\""));
