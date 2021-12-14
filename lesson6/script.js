@@ -114,10 +114,47 @@ class BasketItem {
 }
 
 onload = () => {
-  //const goodsList = new GoodsList();
-  //goodsList.setGoods().then(() => {
-  //  goodsList.render();
-  //});
+  Vue.component('goods-item', {
+    props: ['item'],
+    template: `
+    <div class="goods-item">
+      <h3>{{item.title}}</h3>
+      <p>{{item.price}}</p>
+      <button class="goods-add-btn" type="button">Добавить</button>
+    </div>
+    `
+  });
+
+  Vue.component('basket-item', {
+    props: ['item'],
+    template: `
+    <div class="basket-item">      
+      <div>{{item.title}}</div>    
+      <div>{{item.price}}</div>           
+    </div>
+    `
+  });
+
+  Vue.component('basket', {
+    props: [''],
+    data: function () {
+      return {
+        basketGoods: []
+      }
+    },
+    template: `    
+    <div>
+    <basket-item v-for="item in basketGoods" :item="item"></basket-item>
+    </div>
+    `,
+    mounted() {
+      service(URL, BASKET_GOODS_POSTFIX).then((data) => {
+        const result = reformData(data.contents);
+        this.basketGoods = result;
+        this.filteredGoods = result;
+      });
+    }
+  })
 
   const app = new Vue({
     el: '#app',

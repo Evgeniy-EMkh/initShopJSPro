@@ -18,31 +18,25 @@
       <header>
          <div class="container">
             <div class="nav">
-               <div v-if="isVisibleCart">
-                  <div class="basket">
-                     <div>Название товара</div>
-                     <div>Количество</div>
-                     <div>Цена за шт.</div>
-                     <div>Итого</div>
-                  </div>
+               <div class="basket">
+                  <basket v-if="isVisibleCart"></basket>
                </div>
                <input type="text" v-model="search">
                <button id="search" v-on:click="filter">Искать</button>
                <button class="cart-button" type="button" v-on:click="showBasket">Корзина</button>
                <button class="cart-button" type="button" v-on:click="closeBasket">X</button>
             </div>
+
          </div>
-         <main>
-            <div class="container">
-               <div class="goods-list">
-                  <div class="goods-item" v-for="item in filteredGoods">
-                     <h3>{{item.title}}</h3>
-                     <p>{{item.price}}</p>
-                     <button class="goods-add-btn" type="button">Добавить</button>
-                  </div>
-               </div>
+      </header>
+      <main>
+         <div class="container">
+            <div class="goods-list">
+               <goods-item v-for="item in filteredGoods" v-bind:item="item">
+               </goods-item>
             </div>
-         </main>
+         </div>
+      </main>
    </div>
 </body>
 
