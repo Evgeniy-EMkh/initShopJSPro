@@ -46,9 +46,8 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .goods-item {
@@ -86,7 +85,7 @@ header {
   font-family: "Lato", sans-serif;
   border-radius: 27px 27px 27px 27px;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #6e6d6d;
   outline: none;
   height: 31px;
   width: 90px;

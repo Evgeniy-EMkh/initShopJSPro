@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>initShop</title>
+   <link rel="stylesheet" href="style/style.css">
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+   <script src="script.js"></script>
+</head>
+
+<body>
+   <div id="app">
+      <header>
+         <div class="container">
+            <div class="nav">
+               <div v-if="isVisibleCart">
+                  <div class="basket">
+                     <div>Название товара</div>
+                     <div>Количество</div>
+                     <div>Цена за шт.</div>
+                     <div>Итого</div>
+                  </div>
+               </div>
+               <input type="text" v-model="search">
+               <button id="search" v-on:click="filter">Искать</button>
+               <button class="cart-button" type="button" v-on:click="showBasket">Корзина</button>
+               <button class="cart-button" type="button" v-on:click="closeBasket">X</button>
+            </div>
+         </div>
+         <main>
+            <div class="container">
+               <div class="goods-list">
+                  <div class="goods-item" v-for="item in filteredGoods">
+                     <h3>{{item.title}}</h3>
+                     <p>{{item.price}}</p>
+                     <button class="goods-add-btn" type="button">Добавить</button>
+                  </div>
+               </div>
+            </div>
+         </main>
+   </div>
+</body>
+
+</html>
